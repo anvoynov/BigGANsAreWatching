@@ -157,12 +157,11 @@ def train_segmentation(G, bg_direction, model, params, out_dir,
         print('Starting from step {} checkpoint'.format(start_step))
 
     print('start loop', flush=True)
-    for step, (img, ref) in enumerate(
-            it_mask_gen(mask_generator, gen_devices, torch.cuda.current_device())):
+    for step, (img, ref) in enumerate(it_mask_gen(mask_generator, gen_devices, 'cpu')):
         step += start_step
         model.zero_grad()
-        prediction = model(img)
-        loss = criterion(prediction, ref)
+        prediction = model(img.cuda())
+        loss = criterion(prediction, ref.cuda())
 
         loss.backward()
         optimizer.step()
@@ -255,13 +254,13 @@ def update_out_json(eval_dict, out_json):
         json.dump(out_dict, out)
 
 
+@torch.no_grad()
 def evaluate(segmentation_model, images_dir, masks_dir, metrics, size=None):
     segmentation_dl = torch.utils.data.DataLoader(
         SegmentationDataset(images_dir, masks_dir, size=size, crop=False), 1, shuffle=False)
 
     eval_out = model_metrics(segmentation_model, segmentation_dl, stats=metrics)
     print('Segmenation model', eval_out)
-
     return eval_out
 
 
@@ -273,6 +272,7 @@ def keys_in_dict_tree(dict_tree, keys):
     return True
 
 
+@torch.no_grad()
 def evaluate_all_wrappers(model, out_file, val_images_dirs, val_masks_dirs):
     model.eval()
     evaluation_dict = {}

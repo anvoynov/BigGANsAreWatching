@@ -28,7 +28,7 @@ def precision_recall(mask_gt, mask):
     recall = true_positive / mask_gt_area
     recall[mask_gt_area == 0.0] = 1.0
 
-    return precision, recall
+    return precision.item(), recall.item()
 
 
 def F_score(p, r, betta_sq=0.3):
@@ -42,6 +42,7 @@ def F_max(precisions, recalls, betta_sq=0.3):
     return F.mean(dim=0).max().item()
 
 
+@torch.no_grad()
 def model_metrics(segmetation_model, dataloder, n_steps=None,
                   stats=(IoU, accuracy, F_max), prob_bins=255):
     avg_values = {}
@@ -52,8 +53,7 @@ def model_metrics(segmetation_model, dataloder, n_steps=None,
     n_steps = len(dataloder) if n_steps is None else n_steps
     step = 0
     for step, (img, mask) in enumerate(dataloder):
-        with torch.no_grad():
-            img, mask = img.cuda(), mask.cuda()
+        img, mask = img.cuda(), mask.cuda()
 
         if img.shape[-2:] != mask.shape[-2:]:
             mask = resize(mask, img.shape[-2:])
