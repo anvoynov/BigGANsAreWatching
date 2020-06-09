@@ -69,7 +69,7 @@ To check the synthetic data / segmentation samples / model metrics, please run
 
 You can download pretrained model here:
 
-- [U-net](https://www.dropbox.com/s/3nty6x7fwof7xyv/u_net_imagenet.pth?dl=0) trained on ImageNet-BigBiGAN embeddings using default parameters. 
+- [U-net](https://www.dropbox.com/s/3nty6x7fwof7xyv/u_net_imagenet.pth) trained on ImageNet-BigBiGAN embeddings using default parameters. 
 
 ## Results
 
