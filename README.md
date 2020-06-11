@@ -1,6 +1,6 @@
 # Big GANs Are Watching You
 
-This repository is the official implementation of [Big GANs Are Watching You: Towards Unsupervised Object Segmentation with Off-the-Shelf Generative Models](https://arxiv.org).
+This repository is the official implementation of [Big GANs Are Watching You: Towards Unsupervised Object Segmentation with Off-the-Shelf Generative Models](https://arxiv.org/abs/2006.04988) by Andrey Voynov, Stanislav Morozov, and Artem Babenko.
 ![](images/gen_scheme.jpg)\
 _Schematic representation of our approach._
 
