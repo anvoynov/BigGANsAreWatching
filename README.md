@@ -1,6 +1,6 @@
 # Big GANs Are Watching You
 
-This repository is the official implementation of [Big GANs Are Watching You: Towards Unsupervised Object Segmentation with Off-the-Shelf Generative Models](https://arxiv.org).
+This repository is the official implementation of [Big GANs Are Watching You: Towards Unsupervised Object Segmentation with Off-the-Shelf Generative Models](https://arxiv.org/abs/2006.04988) by Andrey Voynov, Stanislav Morozov, and Artem Babenko.
 ![](images/gen_scheme.jpg)\
 _Schematic representation of our approach._
 
@@ -67,9 +67,11 @@ To check the synthetic data / segmentation samples / model metrics, please run
 
 ## Pre-trained Models
 
-You can download pretrained model here:
+You can download pretrained models here:
 
-- [U-net](https://www.dropbox.com/s/3nty6x7fwof7xyv/u_net_imagenet.pth) trained on ImageNet-BigBiGAN embeddings using default parameters. 
+- [U-net](https://www.dropbox.com/s/3nty6x7fwof7xyv/u_net_imagenet.pth) trained on ImageNet-BigBiGAN embeddings using default parameters.
+- [U-net](https://www.dropbox.com/s/90odh34ddpjvuxk/u_net_cub2002011.pth) trained on CUB-200-2011-BigBiGAN embeddings using default parameters.
+- [U-net](https://www.dropbox.com/s/fk8r9q0tvwaxbpl/u_net_flowers.pth) trained on Flowers-BigBiGAN embeddings using default parameters.
 
 ## Results
 
