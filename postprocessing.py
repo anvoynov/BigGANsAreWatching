@@ -42,8 +42,8 @@ class SegmentationInference(object):
                 raise Exception(
                     'Eithr both (img, mask) should be provided or self.model is not None')
 
-        if  len(mask.shape) == 4:
-            mask = torch.sigmoid(mask)[:, 1]
+        if len(mask.shape) == 4:
+            mask = (1.0 - torch.softmax(mask, dim=1))[:, 0]
 
         if self.resize_to is not None and mask.shape[-2:] != img_shape:
             mask = resize(mask, img_shape)
