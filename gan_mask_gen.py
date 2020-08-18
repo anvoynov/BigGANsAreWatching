@@ -79,7 +79,8 @@ class MaskGenerator(nn.Module):
         if z is None:
             z = self.make_noise(batch_size)
         img = self.G(z)
-        img_shifted_pos = self.G.gen_shifted(z, self.bg_direction.to(z.device))
+        img_shifted_pos = self.G.gen_shifted(
+            z, self.p.latent_shift_r * self.bg_direction.to(z.device))
 
         if self.p.synthezing == MaskSynthesizing.LIGHTING:
             mask = pair_to_mask(img, img_shifted_pos)
@@ -175,5 +176,7 @@ def it_mask_gen(mask_gen, devices, out_device='cpu', delete_orig=True):
 
     while True:
         batch_outs_future = [run_in_background(mask_gen_inst) for mask_gen_inst in mask_generators]
-        img, ref = map(torch.cat, zip(*(future.result() for future in batch_outs_future)))
+        img, ref = \
+            map(torch.cat,
+                zip(*([f.to(out_device) for f in future.result()] for future in batch_outs_future)))
         yield img.to(out_device), ref.to(out_device)
