@@ -159,7 +159,8 @@ def train_segmentation(G, bg_direction, model, params, out_dir,
         print('Starting from step {} checkpoint'.format(start_step))
 
     print('start loop', flush=True)
-    for step, (img, ref) in enumerate(it_mask_gen(mask_generator, gen_devices, 'cpu')):
+    for step, (img, ref) in enumerate(it_mask_gen(mask_generator, gen_devices,
+            torch.cuda.current_device())):
         step += start_step
         model.zero_grad()
         prediction = model(img.cuda())
