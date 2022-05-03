@@ -49,10 +49,10 @@ To train the U-net segmentation model, run this command:
 python train_segmentation.py \
     --out "results" \
     --gan_weights "BigGAN/weights/BigBiGAN_x1.pth" \
-    --z "embeddings/BigBiGAN_ImageNet_z.npy"
+    --z "embeddings/BigBiGAN_ImageNet_z.npy" \
     --bg_direction "BigGAN/weights/bg_direction.pth" \
     --val_images_dir __path_to_images_dir__ \
-    --val_masks_dir __path_to_masks_dir__ \
+    --val_masks_dir __path_to_masks_dir__ 
 ```
 
 ## Custom Data
